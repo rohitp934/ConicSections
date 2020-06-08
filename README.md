@@ -3,7 +3,7 @@ This is a Visualization of Conic Sections using OpenGL.
 
 
 ## Idea
-This project is to make it easier for students to understand Conic Sections easily.
+This project is to make it easier for students to understand Conic Sections.
 
 ## Future Work.
 To scale this application for multiple Use-Cases and multiple platforms.
