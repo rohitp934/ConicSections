@@ -368,7 +368,7 @@ void RotateMenu(int option) {
         glutDisplayFunc(plotSine);
         scaleFactorX = 1 /(4 * PI);
         scaleFactorY = 0.25;
-
+        glutPostRedisplay();
     }
     if(option == 2) {
         scaleFactorX = 1 /(4 * PI);
@@ -376,6 +376,7 @@ void RotateMenu(int option) {
         glutDisplayFunc(plotCos);
         scaleFactorX = 1 /(4 * PI);
         scaleFactorY = 0.25;
+        glutPostRedisplay();
     }
     if(option == 3) {
         scaleFactorX = 1 /(4 * PI);
@@ -383,20 +384,24 @@ void RotateMenu(int option) {
         glutDisplayFunc(plotTan);
         scaleFactorX = 1 /(4 * PI);
         scaleFactorY = 0.25;
+        glutPostRedisplay();
     }
     if(option == 4) {
         t = 0;
         glutDisplayFunc(plotCircle);
         t = 0;
+        glutPostRedisplay();
     }
     if(option == 5) {
         t = 0;
         glutDisplayFunc(plotEllipse);
         t = 0;
+        glutPostRedisplay();
     }
     if(option == 6) {
         glutDisplayFunc(plotParabola);
         tp = PARABOLA_T;
+        glutPostRedisplay();
     }
 }
 int main(int argc, char** argv) {
