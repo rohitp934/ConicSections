@@ -254,3 +254,9 @@
 	<iostream>
 	<cmath>
 
+1591594424 source:d:\personal projects\cg mini project\project-mathemgl-master\main.cpp
+	<gl/freeglut.h>
+	<iostream>
+	<cmath>
+	<stdlib.h>
+

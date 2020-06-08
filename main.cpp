@@ -1,6 +1,7 @@
 #include <gl/freeglut.h>
 #include <iostream>
 #include <cmath>
+#include <stdlib.h>
 
 #define PRECISION 0.0001
 #define ZOOM 0.0001
@@ -57,7 +58,6 @@ void plotSine() {
 
 	scaleFactorX += ZOOM;
 	scaleFactorY += ZOOM;
-
 	glutPostRedisplay();
 }
 
@@ -89,8 +89,7 @@ void plotCos() {
 	glFlush();
 
 	scaleFactorX += ZOOM;
-
-	glutPostRedisplay();
+    glutPostRedisplay();
 }
 
 void plotTan() {
@@ -129,7 +128,6 @@ void plotTan() {
 
 	scaleFactorX += ZOOM;
 	scaleFactorY += ZOOM;
-
 	glutPostRedisplay();
 }
 
@@ -186,7 +184,6 @@ void plotCircle(){
             t = t + PI / 5000;
             glutPostRedisplay();
         }
-
 	glFlush();
 }
 
@@ -251,7 +248,6 @@ void plotEllipse(){
             t = t + PI / 5000;
             glutPostRedisplay();
         }
-
     glFlush();
 }
 
@@ -365,18 +361,60 @@ void reshapeConic(GLsizei width, GLsizei height) {
    gluPerspective(45.0f, aspect, 3.0f, 100.0f);
 }
 
-int main(int argc, char** argv) {
-    int type;
-	glutInit(&argc, argv);
+void RotateMenu(int option) {
+    if(option == 1) {
+        scaleFactorX = 1 /(4 * PI);
+        scaleFactorY = 0.25;
+        glutDisplayFunc(plotSine);
+        scaleFactorX = 1 /(4 * PI);
+        scaleFactorY = 0.25;
 
+    }
+    if(option == 2) {
+        scaleFactorX = 1 /(4 * PI);
+        scaleFactorY = 0.25;
+        glutDisplayFunc(plotCos);
+        scaleFactorX = 1 /(4 * PI);
+        scaleFactorY = 0.25;
+    }
+    if(option == 3) {
+        scaleFactorX = 1 /(4 * PI);
+        scaleFactorY = 0.25;
+        glutDisplayFunc(plotTan);
+        scaleFactorX = 1 /(4 * PI);
+        scaleFactorY = 0.25;
+    }
+    if(option == 4) {
+        t = 0;
+        glutDisplayFunc(plotCircle);
+        t = 0;
+    }
+    if(option == 5) {
+        t = 0;
+        glutDisplayFunc(plotEllipse);
+        t = 0;
+    }
+    if(option == 6) {
+        glutDisplayFunc(plotParabola);
+        tp = PARABOLA_T;
+    }
+}
+int main(int argc, char** argv) {
+    int option=-1;
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	cout << "Choose an option: \n";
+    cout << "1. Drawing graphs\n" << "2. Visualizing Circle\n" << "3. Visualizing Ellipse\n" << "4. Visualizing Parabola\n" << "5. Visualizing Hyperbola\n";
+    cin >> option;
+/*
     cout<< "Select option : \n 1) Sine \n 2) Cosine \n 3) Tangent \n 4) Circle \n 5) Ellipse \n 6) Parabola \n "
         << "7) Generate Ellipse \n 8) Generate Circle \n 9) Generate Parabola \n 10) Generate Hyperbola \n ";
     cin >> type;
-
+*/
 	glutInitWindowSize(500, 500);
 	glutInitWindowPosition(800, 100);
 	glutCreateWindow("Project MathemGL: Display");
-
+/*
 	switch(type) {
         case 1 :
         	glutDisplayFunc(plotSine);
@@ -434,6 +472,41 @@ int main(int argc, char** argv) {
             cout<<"Enter a value b/w 1 and 10"<<endl<<endl;
             break;
    	}
+*/
+    //system("CLS");
+
+
+    switch(option) {
+        case 1: glutDisplayFunc(plotSine);
+                glutCreateMenu(RotateMenu);
+                glutAddMenuEntry("Sine wave", 1);
+                glutAddMenuEntry("Cosine wave", 2);
+                glutAddMenuEntry("Tangent wave", 3);
+                glutAddMenuEntry("Circle", 4);
+                glutAddMenuEntry("Ellipse", 5);
+                glutAddMenuEntry("Parabola", 6);
+                glutAttachMenu(GLUT_RIGHT_BUTTON);
+                break;
+        case 2: maxAngle = -180, maxTranslationZ = -2.2, yTranslation = 0;
+                glutDisplayFunc(generateConic);
+                glutReshapeFunc(reshapeConic);
+                break;
+        case 3: maxAngle = -150, maxTranslationZ = -2.2, yTranslation = -0.2;
+                glutDisplayFunc(generateConic);
+                glutReshapeFunc(reshapeConic);
+                break;
+        case 4: maxAngle = -110, maxTranslationZ = -2.2, yTranslation = -0.2;
+                glutDisplayFunc(generateConic);
+                glutReshapeFunc(reshapeConic);
+                break;
+        case 5: maxAngle = -90, maxTranslationZ = -2.4, yTranslation = -0.4;
+                glutDisplayFunc(generateConic);
+                glutReshapeFunc(reshapeConic);
+                break;
+        default: cout <<"Enter correct choice";
+                 break;
+    }
+
 	glutMainLoop();
 	return 0;
 }
